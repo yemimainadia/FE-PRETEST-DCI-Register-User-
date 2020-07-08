@@ -1,0 +1,33 @@
+.container {
+    margin: 20px auto;
+}
+
+.container h2 {
+    margin-bottom: 40px;
+}
+
+.container > .row {
+    margin: 10px 0;
+}
+
+.container .registration-container {
+    border-right: 1px solid #dadada;
+}
+
+.container form .row.form-submit {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container .profile-container {
+    position: relative;
+}
+.container .profile-picture-fluid {
+    border: 2px solid #fafafa;
+    border-radius: 5px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%,-80%);
+    width: 180px;
+}
