@@ -10,6 +10,29 @@
     margin: 10px 0;
 }
 
+.container .otp {
+    text-align: center;
+}
+
+.btn.btn-warning.btn-block.btn-lg{
+    color: white;
+}
+
+.container .form-otp-wrapper {
+    width: 473px;
+    margin: 0 auto;
+}
+
+.container h3 {
+    margin-bottom: 45px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.otp-input-satuan {
+    height: 72px;
+}
+
 .container .registration-container {
     border-right: 1px solid #dadada;
 }
@@ -30,4 +53,12 @@
     left: 50%;
     transform: translate(-50%,-80%);
     width: 180px;
+}
+
+footer {
+    margin-bottom: 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: left;
 }

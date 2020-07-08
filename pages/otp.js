@@ -38,14 +38,14 @@ const Otp = () => {
             };
             console.log(dataUser);
             API.post('register/otp/match', dataUser).then(response => {
-                const {data} = response.data;
-                if(data) {                    
-                    const {access_token} = data.user;
+                const { data } = response.data;
+                if (data) {
+                    const { access_token } = data.user;
                     Router.push("/profile");
-                    localStorage.setItem('access_token',access_token);
+                    localStorage.setItem('access_token', access_token);
                 }
             }).catch(error => {
-                if(error.response) {
+                if (error.response) {
                     const { errors } = error.response.data.error;
                     alert(errors);
                 }
@@ -59,15 +59,15 @@ const Otp = () => {
         const dataUser = {
             phone: userPhone
         };
-        if(userPhone) {
+        if (userPhone) {
             API.post('register/otp/request', dataUser).then(response => {
-                const {data} = response.data;
+                const { data } = response.data;
                 console.log(data);
-                if(data) {                    
-                    
+                if (data) {
+
                 }
             }).catch(error => {
-                if(error.response) {
+                if (error.response) {
                     const { errors } = error.response.data.error;
                     alert(errors);
                 }
@@ -86,7 +86,7 @@ const Otp = () => {
             <main>
                 <Container>
                     <h3>Verifikasi Akun</h3>
-                    <Form
+                    <Form className="form-otp-wrapper"
                         noValidate
                         validated={validated}
                         onSubmit={handleSubmit}
@@ -100,8 +100,8 @@ const Otp = () => {
                                     required
                                     name="registrationOTP_one"
                                     type="number"
-                                    onInput = {(e) =>{
-                                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,1)
+                                    onInput={(e) => {
+                                        e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 1)
                                     }}
                                 />
                             </Col>
@@ -113,8 +113,8 @@ const Otp = () => {
                                     required
                                     name="registrationOTP_two"
                                     type="number"
-                                    onInput = {(e) =>{
-                                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,1)
+                                    onInput={(e) => {
+                                        e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 1)
                                     }}
                                 />
                             </Col>
@@ -126,8 +126,8 @@ const Otp = () => {
                                     required
                                     name="registrationOTP_three"
                                     type="number"
-                                    onInput = {(e) =>{
-                                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,1)
+                                    onInput={(e) => {
+                                        e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 1)
                                     }}
                                 />
                             </Col>
@@ -139,8 +139,8 @@ const Otp = () => {
                                     required
                                     name="registrationOTP_four"
                                     type="number"
-                                    onInput = {(e) =>{
-                                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,1)
+                                    onInput={(e) => {
+                                        e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 1)
                                     }}
                                 />
                             </Col>
