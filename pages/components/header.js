@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function Header({ pageConfig }) {
+export default function Header({pageConfig}) {    
     const { title } = pageConfig;
 
     return (
