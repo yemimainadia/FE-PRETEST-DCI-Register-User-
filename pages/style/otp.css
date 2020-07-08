@@ -1,0 +1,21 @@
+
+.input.group {
+    width: auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.input-group.input-group-lg {
+    display: table-cell;
+    position: static;
+    text-align: center;
+    margin: 0 auto;
+    float: center;
+    
+}
+
+.otp-input .otp-input-satuan {
+    width: 70px;
+    height: 70px;
+
+}
