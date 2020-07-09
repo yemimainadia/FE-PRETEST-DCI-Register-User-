@@ -11,6 +11,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Education from "./education";
 import Axios from "axios";
+import { ImageUpload } from "./imageUpload";
 
 const LoginPageLanding = dynamic(() => import("../index"));
 
@@ -18,34 +19,44 @@ const Profile = () => {
     const [tokenID, setTokenID] = useState("");
     const [validated, setValidated] = useState(false);
 
+    const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState();
 
     useEffect(() => {
         const tokenauthID = localStorage.getItem("access_token");
-        console.log(tokenauthID);
         if (!tokenauthID) {
             Router.replace("/private", "/", { shallow: true });
         } else {
             setTokenID(tokenauthID);
         }
-    }, [tokenID]);
 
-    const handleSubmit = (event) => { };
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
 
-    const handleUpload = (event) => {
-        event.preventDefault();
-        const data = new FormData();
-        data.append('file', this.state.selectedFile,
-            this.state.selectedFile.name);
-        axios.post(endpoint, data).then((res) => {
-            console.log(res.statusText);
-        });
-    };
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
+
+    }, [tokenID, selectedFile]);
 
     if (!tokenID) return <LoginPageLanding />;
     // the JSX the private page will render
     const pageConfig = {
         title: "My Profile",
     };
+    const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setSelectedFile(e.target.files[0])
+    }
     return (
         <div className="container otp">
             <Header pageConfig={pageConfig} />
@@ -61,11 +72,9 @@ const Profile = () => {
                     <Row>
                         <Col><Education /></Col>
                     </Row>
-                    <input type="file" id="file" name="file" placeholder="Upload Image"
-                        ref="imageInput" accept="image/png, image.jpeg" multiple="false"
-                    />
-                    <button onClick={this.handleUpload}>Upload</button>
-
+                    <Row>
+                        <ImageUpload />
+                    </Row>
                 </Container>
 
             </main>
