@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 import Education from "./education";
 import Axios from "axios";
 import { ImageUpload } from "./imageUpload";
+import { CoverUpload } from "./coverUpload";
 
 const LoginPageLanding = dynamic(() => import("../index"));
 
@@ -19,6 +20,7 @@ const Profile = () => {
     const [tokenID, setTokenID] = useState("");
     const [validated, setValidated] = useState(false);
     const [imageData, setImageData] = useState();
+    const [coverData, setCoverData] = useState();
 
     useEffect(() => {
         const tokenauthID = localStorage.getItem("access_token");
@@ -44,6 +46,12 @@ const Profile = () => {
         }
     }
 
+    const callbackCoverHandle = (value) => {
+        if (value) {
+            setCoverData(value);
+        }
+    }
+
     return (
         <div className="container otp">
             <Header pageConfig={pageConfig} />
@@ -52,7 +60,7 @@ const Profile = () => {
                 <Container bsPrefix="container profile-container">
                     <Row>
                         <Col>
-                            <Image src="/asset/cover/cover.jpg" fluid bsPrefix="img-fluid cover-profile" />
+                            <Image src={coverData ? coverData : "/asset/cover/cover.jpg"} fluid bsPrefix="img-fluid cover-profile" />
                             <Image src={imageData ? imageData : "/asset/cover/profile-picture.png"} fluid bsPrefix="img-fluid profile-picture" />
                         </Col>
                     </Row>
@@ -61,6 +69,9 @@ const Profile = () => {
                     </Row>
                     <Row>
                         <ImageUpload callbackImageHandle={callbackImageHandle} />
+                    </Row>
+                    <Row>
+                        <CoverUpload callbackCoverHandle={callbackCoverHandle} />
                     </Row>
                 </Container>
 
