@@ -62,6 +62,13 @@
     width: 15%;
 }
 
+.container .form-upload-profile-picture form button {
+    font-weight: 600;
+    margin: 10px 0 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
 footer {
 
     background-color: #343a40 !important;

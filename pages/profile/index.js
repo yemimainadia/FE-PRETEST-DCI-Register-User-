@@ -18,9 +18,7 @@ const LoginPageLanding = dynamic(() => import("../index"));
 const Profile = () => {
     const [tokenID, setTokenID] = useState("");
     const [validated, setValidated] = useState(false);
-
-    const [selectedFile, setSelectedFile] = useState();
-    const [preview, setPreview] = useState();
+    const [imageData, setImageData] = useState();
 
     useEffect(() => {
         const tokenauthID = localStorage.getItem("access_token");
@@ -29,34 +27,23 @@ const Profile = () => {
         } else {
             setTokenID(tokenauthID);
         }
+    }, [tokenID]);
 
-        if (!selectedFile) {
-            setPreview(undefined)
-            return
-        }
-
-        const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl);
-
-    }, [tokenID, selectedFile]);
 
     if (!tokenID) return <LoginPageLanding />;
     // the JSX the private page will render
     const pageConfig = {
         title: "My Profile",
     };
-    const onSelectFile = e => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
-        }
 
-        // I've kept this example simple by using the first image instead of multiple
-        setSelectedFile(e.target.files[0])
+    const callbackImageHandle = (value) => {
+        // retrieve uploaded image URL from imageUpload.js
+        // the set "imageData" state to be shown / use as <Image src/>
+        if (value) {
+            setImageData(value);
+        }
     }
+
     return (
         <div className="container otp">
             <Header pageConfig={pageConfig} />
@@ -66,14 +53,14 @@ const Profile = () => {
                     <Row>
                         <Col>
                             <Image src="/asset/cover/cover.jpg" fluid bsPrefix="img-fluid cover-profile" />
-                            <Image src="/asset/cover/profile-picture.png" fluid bsPrefix="img-fluid profile-picture" />
+                            <Image src={imageData ? imageData : "/asset/cover/profile-picture.png"} fluid bsPrefix="img-fluid profile-picture" />
                         </Col>
                     </Row>
                     <Row>
-                        <Col><Education /></Col>
+                        {/*<Col><Education /></Col>*/}
                     </Row>
                     <Row>
-                        <ImageUpload />
+                        <ImageUpload callbackImageHandle={callbackImageHandle} />
                     </Row>
                 </Container>
 
